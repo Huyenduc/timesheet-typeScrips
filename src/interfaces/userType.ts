@@ -12,3 +12,17 @@ export interface IAuthState {
     }
     
 }
+
+
+
+export interface IAuthRes {
+        result: {
+            accessToken: string;
+            encryptedAccessToken: string;
+            expireInSeconds: number;
+            userId: number;
+          },
+   
+    // error: IError;
+    success: boolean;
+  }

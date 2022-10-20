@@ -11,12 +11,7 @@ import { useDispatch } from 'react-redux';
 import { IUserForm } from '../../interfaces/userType'
 import { AppDispatch } from '../../redux/store';
 
-interface IAccount {
-  userName: string;
-  password: string;
-  setUserName: (params: string) => void;
-  setPassword: (params: string) => void;
-}
+
 
 const Login = () => {
   const navigate = useNavigate();
