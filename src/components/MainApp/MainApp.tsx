@@ -1,16 +1,26 @@
 import React from 'react'
-import Navbar from '../header/Header'
+import Header from '../header/Header'
 import MainContainer from '../MainConten/MainContainer'
-import SideBar from '../SideBar/SideBar'
+import SideBar from '../Sidebar/Sidebar';
 
 const MainApp = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleShowSidebar = () => {
+    setOpen(!open)
+  }
   return (
-    <div>
-     
-      <Navbar/>
+    <div style={{background: '#e9e9e9'}}>
       <div>
-        <SideBar/>
-        <MainContainer/>
+
+      <Header handleShowSidebar={handleShowSidebar} />
+      <SideBar
+        open={open}
+      />
+      </div>
+
+      <div className='Container-conten' >
+
+        <MainContainer />
       </div>
     </div>
   )

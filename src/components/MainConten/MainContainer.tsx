@@ -6,14 +6,14 @@ import {
     Navigate
 } from "react-router-dom";
 import Login from '../../page/Login/Login';
-import Tasks from '../../page/Login/Tasks/Tasks';
+import Tasks from '../../page/tasks/Tasks';
 
 const MainContainer = () => {
     return (
         <div>
             <Routes>
                 {/* <Route path="home" element={<Login />} /> */}
-                <Route path="task" element={<Tasks />} />
+                <Route path="app/task" element={<Tasks />} />
                 {/* <Route path="project" element={<Project />} /> */}
             </Routes>
         </div>

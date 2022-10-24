@@ -1,0 +1,142 @@
+.Tasks {
+    background-color: white;
+    width: 100%;
+    /* margin-top: 70px; */
+
+    border: 4px 4px rgba(0, 0, 0, .1);
+}
+
+.Tasks .Tasks-Title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555;
+    padding: 15px;
+    position: relative;
+    border-bottom: 2px solid rgba(204, 204, 204, .35);
+}
+
+.Tasks .Tasks-Title h4 {
+    font-size: 17px;
+    color: #363636;
+    /* font-weight: 700; */
+}
+
+.button {
+    box-sizing: border-box;
+    background-color: #f24b50;
+    color: #fff;
+    cursor: pointer;
+    outline: 0;
+    font-size: 14px;
+    border: none;
+    white-space: nowrap;
+    text-decoration: none;
+    text-align: center;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 4px;
+    overflow: visible;
+}
+
+
+.News {
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Seach {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+
+}
+
+.SearchTasks {
+    display: flex;
+    color: #555;
+    align-items: center;
+    border: 0.5px solid lightgray;
+    padding: 3px;
+    width: 500px;
+    height: 50px;
+    border-radius: 5px;
+
+}
+
+
+.SearchTasks input {
+    border: none;
+    color: #111111;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
+    width: 100%;
+
+}
+
+.SearchTasks input ::placeholder {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ListTasks {
+    padding: 20px;
+}
+
+.ListTasks-Title {
+    color: #555;
+    border-bottom: 2px solid rgba(204, 204, 204, .35);
+}
+
+.ListTasks-Title p {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    font-size: 14px;
+    /* font-weight: 600; */
+}
+
+.ListTasks-Title h4 {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.TableRow :nth-child(odd){
+    background-color:#eee;
+}
+
+.Loading{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* .SearchTasks  */
+
+@media (max-width:800px) {
+    .SearchTasks {
+        width: 400px;
+        transition: 0.5s;
+    }
+
+    .News {
+        display: block;
+
+    }
+
+    .SearchTasks {
+        margin-top: 20px;
+    }
+
+    .Seach {
+        margin-right: 0;
+        transition: 0.5s;
+    }
+
+}

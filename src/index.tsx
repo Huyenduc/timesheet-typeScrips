@@ -4,6 +4,10 @@ import App from './App';
 import "./style/index.css"
 import { Provider } from "react-redux"
 import store from './redux/store';
+import { BrowserRouter } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +15,17 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+    <SnackbarProvider maxSnack={4}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}
+      autoHideDuration={3000}>
+      <App />
+    </SnackbarProvider>
+    </BrowserRouter>
+
 
   </Provider>
   // </React.StrictMode>

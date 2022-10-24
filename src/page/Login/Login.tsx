@@ -26,7 +26,7 @@ const Login = () => {
   
     const token = localStorage.getItem(appConstants.USER_TOKEN)
     if (token) {
-      navigate('/Task')
+      navigate('/App/task')
     }
   }, []);
 
@@ -38,12 +38,10 @@ const Login = () => {
     }
     dispath(
       getAuthenticate({
-        userNameOrEmailAddress: "admin",
-        password: "123qwe",
+        userNameOrEmailAddress: userName,
+        password: password,
         rememberClient: true
       }))
-
-
 
   }
 

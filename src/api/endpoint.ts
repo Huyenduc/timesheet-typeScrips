@@ -12,15 +12,15 @@ export const LOGIN_API: ILogin = {
     LOGIN: 'TokenAuth/Authenticate',
 }
 
-// export const TASKS_API =  {
-//     BASE_URL,
-//     GET_TASK:'services/app/Task/GetAll',
-//     CREATE_TASK:'services/app/Task/Save',
-//     ARCHIVE_TASK:`services/app/Task/Archive`,
-//     DEARCHIVE_TASK:'services/app/Task/DeArchive',
-//     DELETE_TASK:'services/app/Task/Delete'
+export const TASKS_API =  {
+    BASE_URL,
+    GET_TASK:'services/app/Task/GetAll',
+    CREATE_TASK:'services/app/Task/Save',
+    ARCHIVE_TASK:`services/app/Task/Archive`,
+    DEARCHIVE_TASK:'services/app/Task/DeArchive',
+    DELETE_TASK:'services/app/Task/Delete'
 
-// }
+}
 
 // export const PROJECTS_API = {
 //     BASE_URL,

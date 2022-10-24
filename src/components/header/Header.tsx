@@ -1,23 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 // import Logo from '../../assets/image/logo.png'
-// import '../Navbar/Navbar.css'
+import '../header/header.css'
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import { removeToken } from '../../constants/appConstants';
 // import styled from "styled-components";
-const Navbar : React.FC = ({ showSidebar }:any) => {
+
+
+const Navbar  = ({handleShowSidebar}:any) => {
 
   const hanldeLogout = () => {
     removeToken();
   }
 
   return (
+    
     <div className='Navbar'>
       <div className='wrapper'>
         <Link to='#' className='Menu-Bar'>
           <MenuIcon className='icon'
-        //    onClick={showSidebar} 
+           onClick={handleShowSidebar} 
            />
         </Link>
         < div className='Logo_navbar'>
