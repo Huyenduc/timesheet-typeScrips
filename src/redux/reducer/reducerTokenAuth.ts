@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IAuthState } from "../../interfaces/userType";
 import { getAuthenticate } from "../action/TokenAuth";
+import appConstants from "../../constants/appConstants";
 
 
 const initialState: IAuthState = {
@@ -23,7 +24,12 @@ const tokenAuthSlice = createSlice({
         });
         builder.addCase(getAuthenticate.fulfilled, (state, action) =>{
             state.progress = "done"
-            console.log(action.payload)
+            if(action.payload.data?.success === true){
+                localStorage.setItem(appConstants.USER_TOKEN, action.payload.data?.result.accessToken)
+            }
+            else{
+                console.log(action.payload.data?.error)
+            }
             // state.user.accessToken = action.payload?.result.accessToken;
         })
     }

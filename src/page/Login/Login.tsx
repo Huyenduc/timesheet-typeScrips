@@ -21,13 +21,14 @@ const Login = () => {
 
 
   const dispath = useDispatch <AppDispatch>();
-  // useEffect(() => {
-
-  //   const token = localStorage.getItem(appConstants.USER_TOKEN)
-  //   if (token) {
-  //     navigate('/Home')
-  //   }
-  // }, []);
+  useEffect(() => {
+  
+  
+    const token = localStorage.getItem(appConstants.USER_TOKEN)
+    if (token) {
+      navigate('/Task')
+    }
+  }, []);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();

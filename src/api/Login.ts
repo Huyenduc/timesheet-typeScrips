@@ -2,6 +2,7 @@ import axios from "./axios";
 import { handleServiceError } from "../constants/apiError";
 import { LOGIN_API } from "./endpoint";
 import { IUserForm, IAuthRes } from "../interfaces/userType";
+import { AxiosError } from "axios";
 
 const getLogin = async ({ userNameOrEmailAddress, password, rememberClient }: IUserForm) => {
     try {
@@ -12,8 +13,8 @@ const getLogin = async ({ userNameOrEmailAddress, password, rememberClient }: IU
         });
         return res;
         
-    } catch (error) {
-        return handleServiceError(error)
+    } catch (error )  {
+        // return handleServiceError(error as AxiosError)
     }
 
 }

@@ -6,23 +6,26 @@ export interface IUserForm {
 }
 
 export interface IAuthState {
-    progress:string,
-    user:{
+    progress: string,
+    user: {
         accessToken: string
     }
-    
+
 }
 
 
 
 export interface IAuthRes {
+    data: {
         result: {
             accessToken: string;
             encryptedAccessToken: string;
             expireInSeconds: number;
             userId: number;
-          },
-   
-    // error: IError;
-    success: boolean;
-  }
+        },
+
+        error: string
+        success: boolean;
+    }
+
+}
