@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Login from '../../page/Login/Login';
 import Tasks from '../../page/tasks/Tasks';
+import Project from '../../page/Project/Project';
 
 const MainContainer = () => {
     return (
@@ -14,7 +15,7 @@ const MainContainer = () => {
             <Routes>
                 {/* <Route path="home" element={<Login />} /> */}
                 <Route path="app/task" element={<Tasks />} />
-                {/* <Route path="project" element={<Project />} /> */}
+                <Route path="app/project" element={<Project />} />
             </Routes>
         </div>
     )

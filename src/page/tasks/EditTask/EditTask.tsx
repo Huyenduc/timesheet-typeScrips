@@ -22,12 +22,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-
-interface INewTask {
-  id: number;
-  name: string;
-  type: string;
-}
 const EditTask: React.FC<{ task: IGetAllTask }> = ({ task }) => {
 
   const [open, setOpen] = useState(false);
@@ -46,9 +40,8 @@ const EditTask: React.FC<{ task: IGetAllTask }> = ({ task }) => {
 
   useEffect(() => {
     if (progress === "done" && open) {
+      enqueueSnackbar(`Edit Task Success !!`, { variant: 'success'  });
       handleClose();
-    } else if (progress == "") {
-
     }
   }, [progress])
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {ICreateTask} from "../../interfaces/tasksType"
-import getTaskApi, { createTaskApi, archiveTaskApi, deArchiveTaskApi, deleteTaskApi } from "../../api/Task";
+import getTaskApi, { createTaskApi, archiveTaskApi, deArchiveTaskApi, deleteTaskApi } from "../../api/taskApi";
 
 
 export const getTask = createAsyncThunk(
@@ -34,7 +34,7 @@ export const archiveTask = createAsyncThunk(
 export const deArchiveTask = createAsyncThunk(
     "/Task/DeArchive",
     async (id: number) => {
-        const deArchive = { ...(await deArchiveTaskApi(id)), id };
+        const deArchive = { ...(await deArchiveTaskApi({id})), id };
         return deArchive;
     }
 )

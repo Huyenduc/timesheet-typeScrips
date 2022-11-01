@@ -1,0 +1,373 @@
+.HomeProject {
+    background: #e9e9e9;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.Container-Project {
+    background: #e9e9e9;
+    display: flex;
+    padding: 20px;
+}
+
+.Project {
+    background-color: white;
+    width: 100%;
+    /* margin-top: 70px; */
+    border: 4px 4px rgba(0, 0, 0, .1);
+    /* margin-left: 300px; */
+    transition: 0.5s;
+}
+
+.Project-Title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555;
+    padding: 15px;
+    position: relative;
+    border-bottom: 2px solid rgba(204, 204, 204, .35);
+}
+
+.Project-Title h4 {
+    font-size: 17px;
+    color: #363636;
+    /* font-weight: 700; */
+}
+
+.Project-Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.Button-Project {
+    box-sizing: border-box;
+    width: 172px;
+    height: 55px;
+    background-color: #f24b50;
+    color: #fff;
+    cursor: pointer;
+    outline: 0;
+    font-size: 14px;
+    border: none;
+    white-space: nowrap;
+    text-decoration: none;
+    text-align: center;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 4px;
+    overflow: visible;
+}
+
+.Search-Project {
+    margin-left: 30px;
+    display: flex;
+    color: #555;
+    align-items: center;
+    border: 0.5px solid lightgray;
+    padding: 3px;
+    width: 100%;
+    height: 56px;
+    border-radius: 5px;
+
+}
+
+.Select-Project {
+    margin-left: 100px;
+    width: 40%;
+}
+
+.Search-Project input {
+    border: none;
+    color: #111111;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
+    width: 100%;
+
+}
+
+
+.Search-Project input ::placeholder {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ----------------ListProject--------------- */
+
+.pms,
+.member,
+.projectType,
+.time {
+    border-radius: 10px;
+    color: #fff;
+    font: caption;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 2px 8px;
+}
+
+.pms {
+    background: #2e95ea;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 19px;
+    height: 20px;
+    padding:  0 8px;
+}
+
+.member {
+    background: #f44336;
+
+}
+
+.projectType {
+    background: #f89c26;
+    font-size: 12px;
+}
+
+.time {
+    background: #4caf50;
+}
+
+.General p {
+    font-weight: 700;
+    /* margin-right: 50px; */
+    font-size: 14px;
+    width: 140px;
+}
+
+.General span {
+    font-weight: 700;
+    /* margin-right: 50px; */
+    font-size: 14px;
+    /* width: 100px; */
+}
+
+.General span {
+    margin: 13px 5px;
+}
+
+.General .row-general {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.row-general-node {
+    display: flex;
+    width: 80%;
+}
+
+
+
+.A {
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+
+}
+
+.B {
+
+    width: 75%;
+    display: flex;
+}
+
+.team {
+    height: 440px;
+    display: flex;
+}
+
+.team-title {
+    font-weight: 600;
+}
+
+.team-top {
+    display: inline;
+    width: 100%;
+    padding: 5px;
+    height: auto;
+    border-bottom: 2px solid lightgray;
+    border-right: 2px solid lightgray;
+
+}
+
+.team-top span {
+    font-weight: 600;
+    font-size: 14px;
+
+}
+
+.team-checkbok {
+    width: 90%;
+    gap: 60px;
+    /* display: flex ; */
+}
+
+.team-search {
+    display: flex;
+    gap: 20px;
+    width: 90%;
+}
+
+.team-heard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-User {
+    width: 350px;
+    max-width: 200%;
+    /* padding: 10px; */
+    margin-left: 20px;
+    border-bottom: 2px solid lightgray;
+    border-left: 2px solid lightgray;
+    height: 50vh;
+}
+
+.user-id{
+    overflow: scroll;
+    height: 40vh;
+    width: 350px;
+
+}
+.team-item {
+    width: 450px;
+    display: flex;
+    /* gap: 10px; */
+}
+
+.list-item p {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.list-item span {
+    font-size: 10px;
+}
+
+.list-User p {
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.list-member {
+    width: 100%;
+    margin-top: 10px;
+    overflow: scroll;
+    height: 340px;
+}
+
+.icon {
+    display: flex;
+    gap: 20px;
+    color: #555;
+    font-size: 13px;
+}
+.text-danger{
+    font-size: 13px;
+}
+
+@media (max-width:1250px) {
+    .team {
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+
+}
+
+@media (max-width:1100px) {
+    .Container-Project {
+        padding: 30px;
+    }
+   
+
+    .Project {
+        margin-left: 0px;
+        transition: 0.5s;
+    }
+
+    .team-top {
+        display: block;
+        margin-bottom: 10px;
+        box-shadow: #111111;
+        display: block;
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .team-search {
+        display: block;
+        width: 100% !important;
+        /* margin-bottom: 10px; */
+        /* grid-row: 10px; */
+    }
+
+    .team-heard {
+        display: block;
+    }
+
+    .team {
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+
+}
+
+@media (max-width:950px) {
+    .Project-Top {
+        display: block;
+        transition: 0.5s;
+    }
+
+    .Select-Project {
+        width: 100%;
+        transition: 0.5;
+        margin: 30px 0px;
+    }
+
+    .Search-Project {
+        margin: 0 0;
+        width: 100%;
+        transition: 0.5s;
+    }
+
+    .General .row-general {
+        display: block;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .General .row-general-node {
+        display: block;
+    }
+
+    .new-client {
+        margin: 20px;
+    }
+
+}
+
+@media (max-width:400px) {
+    .Button-Project {
+        max-width: 100%;
+        transition: 0.5s;
+        font-size: 10px;
+    }
+    .sdsd{
+        width: 420% !important;
+    }
+    
+}

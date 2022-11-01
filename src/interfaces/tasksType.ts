@@ -1,7 +1,7 @@
 
 export interface IGetAllTask {
     name: string;
-    type?: number;
+    type: number;
     isDeleted: boolean;
     billable?: boolean;
     id: number;
@@ -14,15 +14,21 @@ export interface ICreateTask {
     type: number
 }
 
+export interface ITaskSaveRes {
+    
+    result: IGetAllTask,
+    error: string
+}
 
 export interface ITaskRes {
-    data: {
-        result: IGetAllTask;
-        error?:string
-    }
+    result: IGetAllTask[];
 }
 
 export interface IDeleteTaskRes {
     success: boolean;
     error: string;
-  }
+}
+
+export interface IDeArchiveTaskReq {
+    id: number;
+}

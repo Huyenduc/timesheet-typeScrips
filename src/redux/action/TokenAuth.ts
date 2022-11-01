@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IUserForm } from "../../interfaces/userType";
-import getLogin from "../../api/Login";
+import getLogin from "../../api/loginApi";
 
 export const getAuthenticate = createAsyncThunk(
     "Login/Authenticate",

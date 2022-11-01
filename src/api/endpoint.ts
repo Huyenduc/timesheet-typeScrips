@@ -22,17 +22,17 @@ export const TASKS_API =  {
 
 }
 
-// export const PROJECTS_API = {
-//     BASE_URL,
-//     GET_ALL_PROJECTS:'services/app/Project/GetAll',
-//     GET_ALL_CUSTOMER:'services/app/Customer/GetAll',
-//     GET_QUANTILY_PROJECT:'services/app/Project/GetQuantityProject',
-//     CREATE_PROJECT:'services/app/Project/Save',
-//     DELETE_PROJECT:'services/app/Project/Delete',
-//     GET_USER_NOT_PAGGING:'services/app/User/GetUserNotPagging',
-//     CREATE_CLIENT:'services/app/Customer/Save',
-//     GET_PROJECT:'services/app/Project/Get',
-//     ACTIVE_PROJECT: 'services/app/Project/Active',
-//     INACTIVE_PROJECT: 'services/app/Project/Inactive',
-// }
+export const PROJECTS_API = {
+    BASE_URL,
+    GET_ALL_PROJECTS:'services/app/Project/GetAll',
+    GET_ALL_CUSTOMER:'services/app/Customer/GetAll',
+    GET_QUANTILY_PROJECT:'services/app/Project/GetQuantityProject',
+    CREATE_PROJECT:'services/app/Project/Save',
+    DELETE_PROJECT:'services/app/Project/Delete',
+    GET_USER_NOT_PAGGING:'services/app/User/GetUserNotPagging',
+    CREATE_CLIENT:'services/app/Customer/Save',
+    GET_PROJECT:'services/app/Project/Get',
+    ACTIVE_PROJECT: 'services/app/Project/Active',
+    INACTIVE_PROJECT: 'services/app/Project/Inactive',
+}
 

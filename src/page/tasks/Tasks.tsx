@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from '../../api/axios'
 import { useEffect } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import "../tasks/Tasks.css"
@@ -9,43 +8,41 @@ import CommonTasks from './CommonTasks/CommonTasks';
 import OtherTask from './OtherTask/OtherTask';
 import { useDispatch, useSelector } from "react-redux";
 import { getTask } from "./../../redux/action/Task";
-import { setSearchName, resetProgress,  getAllTaskSelector  } from "../../redux/reducer/reducerTask";
+import { setSearchName, resetProgress, getAllTaskSelector } from "../../redux/reducer/reducerTask";
 import { useSnackbar } from 'notistack';
-import Loading from "../../Notify/Loading"
-import { AppDispatch } from '../../redux/store';
-// import {} from "../../redux/reducer/tasksReducer"
+import Loading from "../../Notify/Loading";
+import { AppDispatch, RootState } from '../../redux/store';
 
 const Tasks = () => {
     const [searchItem, setSearchItem] = useState("");
-    const dispatch = useDispatch <AppDispatch>();
-
+    const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
         dispatch(getTask());
     }, []);
     const { enqueueSnackbar } = useSnackbar();
     const getAll = useSelector(getAllTaskSelector);
-    // const progress = useSelector((state ) => state.task.progress);
-    // const error = useSelector((state) => state.task.error);
-    // const idError = useSelector((state) => state.task.idError);
+    const progress = useSelector((state: RootState) => state.task.progress);
+    const error = useSelector((state: RootState) => state.task.error);
 
-    // useEffect(() => {
-    //     if (progress == "done") {
-    //         if (idError == "CreateTask") {
-    //             enqueueSnackbar(`${idError} Success !`, { variant: 'success' });
-    //         } else if (idError == "DeArchiveTask") {
-    //             enqueueSnackbar(`${idError} Success !`, { variant: 'success' });
-    //         } else if (idError == "DeleteTask") {
-    //             enqueueSnackbar(`${idError} Success !`, { variant: 'success' });
-    //         } else {
-    //             enqueueSnackbar(`${idError} Success !`, { variant: 'success' });
-    //         }
-    //         dispatch(resetProgress());
-    //     } else if (progress == 'error' || idError == 'DeleteTask' && idError == "archive") {
-    //         enqueueSnackbar(`This taskId ${error} is in a project ,You can't delete task !`, { variant: 'error' })
-    //         dispatch(resetProgress());
-    //     }
+    useEffect(() => {
+        if (progress == "Ardone") {
+            enqueueSnackbar(`Archive Task Success !!`, { variant: 'success' });
+            dispatch(resetProgress());
+        }  else if (progress == "Dedone"){
+            enqueueSnackbar(`Unarchive Task Success !!`, { variant: 'success' });
+            dispatch(resetProgress());
+        }
+        else if (progress == "Deletedone"){
+            enqueueSnackbar(`Delete Task Success !!`, { variant: 'success' });
+            dispatch(resetProgress());
+        }
+        
+        else if (progress === "error") {
+            enqueueSnackbar(error, { variant: 'error' })
+            dispatch(resetProgress());
+        }
 
-    // }, [progress])
+    }, [progress])
 
     useEffect(() => {
         dispatch(

@@ -68,31 +68,30 @@ const taskSlice = createSlice({
             try {
                 state.progress = "done";
                 state.idError = "CreateTask"
-                console.log(action.payload?.data.result)
                 const findTask = state.tasks.find(
-                    (task) => task.id === action.payload?.data.result.id
+                    (task) => task.id === action.payload?.result.id
                 );
                 if (findTask) {
                     state.tasks = state.tasks.map((task) => {
-                        if (task.id === action.payload?.data.result.id) {
-                            task.name = action.payload?.data.result.name;
-                            task.type = action.payload?.data.result.type;
+                        if (task.id === action.payload?.result.id) {
+                            task.name = action.payload?.result.name;
+                            task.type = action.payload?.result.type;
                         }
                         return task;
                     });
                 } else {
-                    // state.tasks.push(action.payload?.data.result);
+                    state.tasks.push(action.payload?.result);
                 }
             } catch {
                 state.progress = "error";
-                return;
+                // console.log(action.payload.error)
+                state.error = action.payload.error
+                
             }
         });
         builder.addCase(archiveTask.fulfilled, (state, action) => {
-            state.progress = "done";
-            state.idError = "ArchiveTask";
-
-            if (action.payload.status == 200) {
+            state.progress = "Ardone";
+            if (action.payload.success == true) {
 
                 state.tasks = state.tasks.map((task) => {
                     if (task.id === action.payload.id) {
@@ -102,15 +101,14 @@ const taskSlice = createSlice({
                 });
 
             } else {
-            //   state.messenger = action.payload.data?.error
-              
+                state.progress = "error";
 
+                state.error = action.payload.error
             }
         });
         builder.addCase(deArchiveTask.fulfilled, (state, action) => {
-            state.progress = "done";
-            state.idError = "DeArchiveTask"
-            if (action.payload.status == 200) {
+            state.progress = "Dedone";
+            if (action.payload.success == true) {
                 state.tasks = state.tasks.map((task) => {
                     if (task.id === action.payload.id) {
                         task.isDeleted = false;
@@ -118,19 +116,18 @@ const taskSlice = createSlice({
                     return task;
                 })
             } else {
-                // state.error = action.payload.message;
+                state.progress = "error";
+                state.error = action.payload.error;
 
             }
         });
         builder.addCase(deletetask.fulfilled, (state, action) => {
-            state.progress = "done";
-            state.idError = "DeleteTask";
-            if (action.payload.status == 200) {
+            state.progress = "Deletedone";
+            if (action.payload.success == true) {
                 state.tasks = state.tasks.filter((item) => item.id !== action.payload.id)
             } else {
-                // state.error = action.payload.id
                 state.progress = "error";
-                state.idError = "DeleteTask"
+                state.error = action.payload.error;
             }
         })
 
