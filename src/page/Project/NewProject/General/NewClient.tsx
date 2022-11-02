@@ -6,11 +6,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useForm } from 'react-hook-form'
-import { createClient } from '../../../../redux/action/Projects';
+import { createClient } from '../../../../redux/action/Project';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from '../../../../redux/store';
+import { IcreateClient } from '../../../../interfaces/projectType';
 
 const style = {
     position: 'absolute',
@@ -25,23 +27,28 @@ const style = {
     p: 4,
 };
 
-const NewClient = ({ openClient, setOpenClient }) => {
+interface state {
+    openClient: boolean,
+    setOpenClient: (params: boolean) => void
+}
+
+const NewClient = ({ openClient, setOpenClient }: state) => {
 
     const schema = yup.object({
         name: yup.string().required(),
         code: yup.string().required(),
     }).required();
 
-    const { register, handleSubmit, reset, formState: { errors, isDirty, isValid } } = useForm({ resolver: yupResolver(schema) });
-    const dispatch = useDispatch();
+    const { register, handleSubmit, reset, formState: { errors, isDirty, isValid } } = useForm<IcreateClient>({ resolver: yupResolver(schema) });
+    const dispatch = useDispatch<AppDispatch>();
     const handleClose = () => {
         setOpenClient(false)
         reset()
     };
     const { enqueueSnackbar } = useSnackbar();
 
-    const getProgaress = useSelector((state) => state.project.progaress);
-    const error = useSelector((state) => state.project.message);
+    const getProgaress = useSelector((state: RootState) => state.project.progaress);
+    const error = useSelector((state: RootState) => state.project.message);
 
     useEffect(() => {
         if (getProgaress === "done" && openClient) {
@@ -52,9 +59,9 @@ const NewClient = ({ openClient, setOpenClient }) => {
             enqueueSnackbar(`${error} !`, { variant: 'error' });
         }
 
-    }, [getProgaress], [error])
+    }, [getProgaress])
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: IcreateClient) => {
         console.log(data)
         dispatch(createClient(data));
     }
@@ -149,7 +156,7 @@ const NewClient = ({ openClient, setOpenClient }) => {
                             alignItems: "center"
                         }}
                         onClick={handleSubmit(onSubmit)}
-                        disabled ={!isDirty && !isValid}
+                        disabled={!isDirty && !isValid}
                     >
                         Save
                     </Button>

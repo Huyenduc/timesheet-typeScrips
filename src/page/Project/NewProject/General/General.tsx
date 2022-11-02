@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
 import { TextField, MenuItem, FormGroup, Button, Checkbox, FormControlLabel, FormControl, InputLabel, Select } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Form from 'react-bootstrap/Form';
@@ -7,14 +8,23 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { getAllCustomeSelector, getProject2 } from '../../../../redux/reducer/projectReducer'
+import { getAllCustomeSelector } from '../../../../redux/reducer/reducerProject'
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useFormContext } from 'react-hook-form';
 import NewClient from './NewClient';
 
+interface myProps {
 
+  register: any;
+  control: any;
+  activate: string;
+  setActivate: any;
+  errors: any;
+  setValue: any;
+  trigger: any;
+}
 
-const General = ({ register, setValue, control, activate, setActivate, errors, trigger }) => {
+const General = ({ register, setValue, control, activate, setActivate, errors, trigger }: myProps) => {
   // const [custome, setcustome] = useState("");
 
 
@@ -43,13 +53,13 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
 
       <div className='row-general' style={{ marginTop: 10 }} >
         <p >Client*</p>
-        <div style={{width: "55%", display:'block'}}>
-          <Controller name="customerId" 
+        <div style={{ width: "55%", display: 'block' }}>
+          <Controller name="customerId"
             render={({ field }) => (
               <>
                 <FormControl sx={{ width: '100%' }}>
                   <InputLabel id="select-label" error={errors.customerId ? true : false} >Choose a client...</InputLabel>
-                  <Select labelId="select-label" label="Choose a client..." error={errors.customerId ? true : false}  {...field} 
+                  <Select labelId="select-label" label="Choose a client..." error={errors.customerId ? true : false}  {...field}
                     MenuProps={MenuProps}
                   >
                     {
@@ -98,11 +108,11 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
 
       <div className='row-general' >
         <p >Project Name*</p>
-        <FormGroup sx={{ width: "55%" }} noValidate autoComplete="off">
+        <FormGroup sx={{ width: "55%" }}>
           <TextField
             id="outlined-select-gender"
             label={"Name"}
-            
+
             {...register("name", { required: true })}
             variant="outlined"
             error={errors.name ? true : false}
@@ -118,7 +128,7 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
       </div>
       <div className='row-general' >
         <p >Project Code*</p>
-        <FormGroup sx={{ width: "20%" }} noValidate autoComplete="off">
+        <FormGroup sx={{ width: "20%" }} >
           <TextField
             id="outlined"
             label={"code"}
@@ -147,7 +157,7 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
                 <DesktopDatePicker
                   label="Time Start"
                   inputFormat="DD/MM/YYYY"
-                  inputVariant="outlined"
+                  // inputVariant="outlined"
                   value={value}
                   onChange={onChange}
                   renderInput={(params) => <TextField {...params} />}
@@ -167,7 +177,7 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
                 <DesktopDatePicker
                   label="Time End"
                   inputFormat="DD/MM/YYYY"
-                  inputVariant="outlined"
+                  // inputVariant="outlined"
                   value={value}
                   onChange={onChange}
                   renderInput={(params) => <TextField {...params} />}
@@ -180,7 +190,7 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
 
       <div className='row-general-node'>
         <p >Note</p>
-        <FormGroup sx={{ width: "80%" }} noValidate autoComplete="off">
+        <FormGroup sx={{ width: "80%" }} >
           <Form.Control
             as="textarea"
             rows={2.5}
@@ -191,21 +201,21 @@ const General = ({ register, setValue, control, activate, setActivate, errors, t
 
       <div className='row-general' style={{ alignItems: 'center' }}>
         <p style={{ marginBottom: 0 }} >All User</p>
-        <FormGroup sx={{ width: "80%" }} noValidate autoComplete="off">
+        <FormGroup sx={{ width: "80%" }} >
           <FormControlLabel
             control={
               <Controller
-              name='isAllUserBelongTo'
-              control={control}
-              render={({ field: props }) => (
-                <Checkbox
-                  {...props}
-                  checked={props.value}
-                  onChange={(e) => props.onChange(e.target.checked)}
-                />
-              )}
-            />
-           }
+                name='isAllUserBelongTo'
+                control={control}
+                render={({ field: props }) => (
+                  <Checkbox
+                    {...props}
+                    checked={props.value}
+                    onChange={(e) => props.onChange(e.target.checked)}
+                  />
+                )}
+              />
+            }
             label="Auto add user as a member of this project when creating new user" />
         </FormGroup>
       </div>

@@ -1,24 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    getProjects,getQuantity,
-     getCustome, 
-    //  getUser
-    
-     createProject,
-    // createClient, getItemProject, deleteProject, activeProject, inactiveProject
+    getProjects, getQuantity,
+    getCustome,
+     getUser,
+    createProject,
+    createClient, 
+    // getItemProject, deleteProject, activeProject, inactiveProject
 } from "../action/Project";
 import { getTask } from '../action/Task'
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { IProject, IGetQuantity, IGetCustomer, ICreateProject } from "../../interfaces/projectType"
+import { IProject, IGetQuantity, IGetCustomer, ICreateProject,IGetUserNotPagging } from "../../interfaces/projectType";
+import { IGetAllTask } from "../../interfaces/tasksType";
+
 
 interface ProjectState {
     projects: IProject[],
     quantitys: IGetQuantity[],
     progaress: string,
     customes: IGetCustomer[],
-    createProject:ICreateProject[],
-    project:ICreateProject,
+    createProject: ICreateProject[],
+    project: ICreateProject,
+    users:IGetUserNotPagging [],
+    listMembers:IGetUserNotPagging [],
+    selectedMembers:IGetUserNotPagging [],
+
+    tasks:IGetAllTask [],
+    listTasks:IGetAllTask [],
+    selectedTasks:IGetAllTask [],
     message: string,
 
 }
@@ -61,13 +70,13 @@ const initialState: ProjectState = {
     },
     customes: [],
     quantitys: [],
-    // users: [],
-    // tasks: [],
-    // listTasks: [],
-    // listMembers: [],
+    users: [],
+    tasks: [],
+    listTasks: [],
+    listMembers: [],
     // general: [],
-    // selectedMembers: [],
-    // selectedTasks: [],
+    selectedMembers: [],
+    selectedTasks: [],
     progaress: "",
     message: "",
 }
@@ -79,44 +88,44 @@ const projectSlice = createSlice({
         resetProgress: (state) => {
             state.progaress = "";
         },
-        // resetSelectedMembers: (state) => {
-        //     state.selectedMembers = [];
-        // },
-        // pushMembers: (state, action) => {
+        resetSelectedMembers: (state) => {
+            state.selectedMembers = [];
+        },
+        pushMembers: (state, action) => {
 
-        //     state.selectedMembers.push(action.payload);
-        //     state.listMembers = state.listMembers.filter((item) => item.id !== action.payload.id);
-        //     console.log(state.selectedMembers)
-        // },
-        // removeMembers: (state, action) => {
-        //     console.log(action)
-        //     state.selectedMembers = state.selectedMembers.filter((item) => item.id !== action.payload.id);
-        //     state.listMembers.push(action.payload);
-        // },
-        // updateMemberType: (state, action) => {
-        //     state.selectedMembers = state.selectedMembers.map((member) => {
-        //         if (member.id === action.payload.id) {
-        //             member.projectType = action.payload.type;
-        //         }
-        //         return member;
-        //     });
-        // },
-        // pushTasks: (state, action) => {
-        //     state.selectedTasks.push(action.payload);
-        //     state.listTasks = state.listTasks.filter((item) => item.id !== action.payload.id);
-        // },
-        // removeTask: (state, action) => {
-        //     state.selectedTasks = state.selectedTasks.filter((item) => item.id !== action.payload.id);
-        //     state.listTasks.push(action.payload);
-        // },
-        // updateBillable: (state, action) => {
-        //     state.selectedTasks = state.selectedTasks.map((task) => {
-        //         if (task.id === action.payload.id) {
-        //             task.billable = action.payload.billable;
-        //         }
-        //         return task;
-        //     })
-        // }
+            state.selectedMembers.push(action.payload);
+            state.listMembers = state.listMembers.filter((item) => item.id !== action.payload.id);
+            console.log(state.selectedMembers)
+        },
+        removeMembers: (state, action) => {
+            console.log(action)
+            state.selectedMembers = state.selectedMembers.filter((item) => item.id !== action.payload.id);
+            state.listMembers.push(action.payload);
+        },
+        updateMemberType: (state, action) => {
+            state.selectedMembers = state.selectedMembers.map((member) => {
+                if (member.id === action.payload.id) {
+                    member.projectType = action.payload.type;
+                }
+                return member;
+            });
+        },
+        pushTasks: (state, action) => {
+            state.selectedTasks.push(action.payload);
+            state.listTasks = state.listTasks.filter((item) => item.id !== action.payload.id);
+        },
+        removeTask: (state, action) => {
+            state.selectedTasks = state.selectedTasks.filter((item) => item.id !== action.payload.id);
+            state.listTasks.push(action.payload);
+        },
+        updateBillable: (state, action) => {
+            state.selectedTasks = state.selectedTasks.map((task) => {
+                if (task.id === action.payload.id) {
+                    task.billable = action.payload.billable;
+                }
+                return task;
+            })
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getProjects.fulfilled, (state, action) => {
@@ -132,15 +141,15 @@ const projectSlice = createSlice({
         builder.addCase(getCustome.fulfilled, (state, action) => {
             state.customes = action.payload.result;
         });
-        // builder.addCase(getUser.fulfilled, (state, action) => {
-        //     state.listMembers = action.payload.result;
-        //     state.users = action.payload.result;
-        // });
-        // builder.addCase(getTask.fulfilled, (state, action) => {
-        //     state.tasks = action.payload.result;
-        //     state.selectedTasks = state.tasks.filter((item) => item.type == 0);
-        //     state.listTasks = state.tasks.filter((item) => item.type == 1);
-        // });
+        builder.addCase(getUser.fulfilled, (state, action) => {
+            state.listMembers = action.payload.result;
+            state.users = action.payload.result;
+        });
+        builder.addCase(getTask.fulfilled, (state, action) => {
+            state.tasks = action.payload.result;
+            state.selectedTasks = state.tasks.filter((item) => item.type == 0);
+            state.listTasks = state.tasks.filter((item) => item.type == 1);
+        });
 
         builder.addCase(createProject.pending, (state) => {
             state.progaress = "pending"
@@ -174,17 +183,17 @@ const projectSlice = createSlice({
             }
 
 
-        // let pushP = [];
-        // const data = [action.payload.data.result];
-        // console.log(data)
-        // data.forEach((item) => {
-        //     pushP.push({
-        //         name: item.name,
-        //         code: item.code,
-        //         // users:[]
+            // let pushP = [];
+            // const data = [action.payload.data.result];
+            // console.log(data)
+            // data.forEach((item) => {
+            //     pushP.push({
+            //         name: item.name,
+            //         code: item.code,
+            //         // users:[]
 
-        //     })
-        // })
+            //     })
+            // })
 
 
         });
@@ -195,22 +204,23 @@ const projectSlice = createSlice({
 
 
 
-        // builder.addCase(createClient.pending, (state, action) => {
-        //     state.progaress = "pending"
-        // });
-        // builder.addCase(createClient.fulfilled, (state, action) => {
-        //     if (action.payload.status === 200) {
-        //         state.progaress = "done";
-        //         state.customes.push(action.payload.data.result);
-        //     } else {
-        //         state.progaress = "error";
-        //         state.message = action.payload.error;
-        //     }
+        builder.addCase(createClient.pending, (state, action) => {
+            state.progaress = "pending"
+        });
+        builder.addCase(createClient.fulfilled, (state, action) => {
+           console.log(action.payload.success)
+            if (action.payload.success === true) {
+                state.progaress = "done";
+                state.customes.push(action.payload.result);
+            } else {
+                state.progaress = "error";
+                state.message = action.payload.error;
+            }
 
-        // });
-        // builder.addCase(createClient.rejected, (state, action) => {
-        //     state.progaress = "error"
-        // });
+        });
+        builder.addCase(createClient.rejected, (state, action) => {
+            state.progaress = "error"
+        });
 
         // builder.addCase(activeProject.pending, (state) => {
         //     state.progaress = "pending"
@@ -310,8 +320,8 @@ export const getAllCustomeSelector = createSelector(
 // console.log(getProject)
 
 export const {
-    //  resetSelectedMembers,
-    //  pushMembers, removeMembers, updateMemberType, pushTasks, removeTask, updateBillable 
+     resetSelectedMembers,
+     pushMembers, removeMembers, updateMemberType, pushTasks, removeTask, updateBillable 
 } = projectSlice.actions;
 
 export default projectSlice;

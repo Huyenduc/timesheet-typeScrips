@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import '../Project/project.css'
-// import NewProject from './NewProject/NewProject';
+import NewProject from './NewProject/NewProject';
 import SelectProjects from './SelectProjects/SelectProjects';
 import SearchProject from './SearchProject/SearchProject';
 import ListProject from './ListProjects/ListProject';
-import { getProjects } from "../../redux/action/Project";
+import { getProjects,getCustome } from "../../redux/action/Project";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProjectSelector } from '../../redux/reducer/reducerProject';
 import Loading from "../../Notify/Loading";
@@ -28,7 +28,7 @@ const Project = () => {
 
     useEffect(() => {
         dispatch(getProjects({ status: status, search: debouncedSearch }));
-        // dispatch(getCustome());
+        dispatch(getCustome());
     }, [status]);
 
     useEffect(() => {
@@ -55,7 +55,7 @@ const Project = () => {
                 </div>
 
                 <div className='Project-Top'>
-                    {/* <NewProject status={status} debouncedSearch={debouncedSearch} /> */}
+                    <NewProject  />
                     <SelectProjects
                         setStatus={setStatus}
                     // getAllProject={getAllProject}

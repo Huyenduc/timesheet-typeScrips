@@ -240,7 +240,7 @@
 
 }
 .team-item {
-    width: 450px;
+    /* width: 450px; */
     display: flex;
     /* gap: 10px; */
 }

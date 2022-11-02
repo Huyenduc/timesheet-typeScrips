@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import { List, ListItem, ListItemButton, Avatar, Select, MenuItem, FormControl } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { removeMembers, updateMemberType } from '../../../../../redux/reducer/projectReducer'
+import { removeMembers, updateMemberType } from '../../../../../redux/reducer/reducerProject'
 import { useDispatch } from 'react-redux';
 import Chip from '@mui/material/Chip';
+import { IGetUserNotPagging } from '../../../../../interfaces/projectType';
 
 
-const ListMember = ({ member }) => {
+const ListMember:React.FC<{member:IGetUserNotPagging}> = ({ member }) => {
 
     const [memberType, setMemberType] = useState("0");
     const dispatch = useDispatch();
 
-    const handleChangeMemberType = (e) => {
+    const handleChangeMemberType = (e:any) => {
         setMemberType(e.target.value);
         dispatch(updateMemberType({ ...member, type: parseInt(e.target.value) }))
     }
-    const handleRemoveMenbers = (user) => {
+    const handleRemoveMenbers = (user:IGetUserNotPagging) => {
         dispatch(removeMembers(user));
     }
     return (

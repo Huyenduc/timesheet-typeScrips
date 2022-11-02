@@ -14,22 +14,24 @@ import {
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import { useDispatch, useSelector } from 'react-redux';
-import { pushTasks, removeTask, updateBillable } from '../../../../redux/reducer/projectReducer'
+import { pushTasks, removeTask, updateBillable } from '../../../../redux/reducer/reducerProject'
+import { AppDispatch, RootState } from '../../../../redux/store';
+import { IGetAllTask } from '../../../../interfaces/tasksType';
 
 
 
 const Tasks = () => {
   const [check, setCheck] = useState(true);
-  const getTasks = useSelector((state) => state.project.listTasks);
-  const selectTasks = useSelector((state) => state.project.selectedTasks);
+  const getTasks = useSelector((state: RootState) => state.project.listTasks);
+  const selectTasks = useSelector((state: RootState) => state.project.selectedTasks);
 
-  const disPatch = useDispatch();
+  const disPatch = useDispatch<AppDispatch>();
 
-  const handleAddTask = (item) => {
+  const handleAddTask = (item: IGetAllTask) => {
     disPatch(pushTasks(item));
   }
 
-  const handleRemoveTask = (item) => {
+  const handleRemoveTask = (item: IGetAllTask) => {
     disPatch(removeTask(item));
   }
 
@@ -48,6 +50,7 @@ const Tasks = () => {
                       Billable
                     </div>
                     <FormControlLabel
+                      label=""
                       control={<Checkbox
                         name='isAllUserBelongTo'
                         defaultChecked={true}
@@ -60,12 +63,12 @@ const Tasks = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {!selectTasks ? null : selectTasks.map((item,index)  => (
-                <TableRow sx={ index % 2? { background : "#e9e9e9" }:{ background : "white" }}
+              {!selectTasks ? null : selectTasks.map((item, index) => (
+                <TableRow sx={index % 2 ? { background: "#e9e9e9" } : { background: "white" }}
                   key={item.id}>
                   <TableCell>
                     <RemoveCircleIcon
-                    onClick={()=>handleRemoveTask(item)}
+                      onClick={() => handleRemoveTask(item)}
                     />
                   </TableCell>
                   <TableCell  >
@@ -73,12 +76,14 @@ const Tasks = () => {
                   </TableCell>
                   <TableCell >
                     <FormControlLabel
+                      label=""
                       control={<Checkbox
                         name='isAllUserBelongTo'
                         // value={check}
                         defaultChecked={true}
-                        onChange={(e) => {setCheck(e.target.checked);
-                              disPatch((updateBillable({...item,billable:e.target.checked})));
+                        onChange={(e) => {
+                          setCheck(e.target.checked);
+                          disPatch((updateBillable({ ...item, billable: e.target.checked })));
                         }}
                       // {...register("isAllUserBelongTo")}
                       />}

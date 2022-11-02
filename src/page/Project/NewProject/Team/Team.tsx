@@ -4,7 +4,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import ListUsers from './ListUsers/ListUsers'
 import { useSelector } from 'react-redux';
 import ListMember from './ListMember/ListMember';
-import useDebounced from '../../../../Notify/useDebounced';
+import useDebounced from '../../../../hooks/useDebounced';
+import { RootState } from '../../../../redux/store';
 
 const Team = () => {
   const [openListView, setOpenListView] = useState(false);
@@ -13,14 +14,14 @@ const Team = () => {
   const [searchUser, setSearchUser] = useState("");
   const [searchMember, setSearchMember] = useState("");
 
-  const getUser = useSelector((state) => state.project.listMembers);
-  const getMember = useSelector((state) => state.project.selectedMembers);
+  const getUser = useSelector((state: RootState) => state.project.listMembers);
+  const getMember = useSelector((state: RootState) => state.project.selectedMembers);
 
-  const handleChangeBranch = (e) => {
+  const handleChangeBranch = (e: any) => {
     setBranch(e.target.value)
   };
 
-  const handleChangeType = (e) => {
+  const handleChangeType = (e: any) => {
     setType(e.target.value)
   };
 
@@ -57,7 +58,7 @@ const Team = () => {
               sx={{ width: '90%' }}
               label="Search by name, email"
               value={searchMember}
-              onChange={(e)=>setSearchMember(e.target.value)}
+              onChange={(e) => setSearchMember(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -91,7 +92,7 @@ const Team = () => {
           {/* <Collapse in={openListView} timeout="auto" unmountOnExit> */}
           <div className='list-member'>
             {
-              getMember.filter((i)=> i.name.includes(debouncedSearch)).map((item) => (
+              getMember.filter((i) => i.name.includes(debouncedSearch)).map((item) => (
                 <ListMember key={item.id} member={item} />
               ))
             }
@@ -102,67 +103,8 @@ const Team = () => {
         </div>
       </div>
       <div >
-
-        <Collapse in={openListView} timeout="auto" unmountOnExit>
-          <div className='list-User'>
-            <p>Select team member</p>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
-                <InputLabel id="demo-simple-select-standard-label">Branch</InputLabel>
-                <Select
-                  id="demo-simple-select"
-                  value={branch}
-                  onChange={handleChangeBranch}
-                >
-                  <MenuItem value={"All"}>All</MenuItem>
-                  <MenuItem value={1}>Ha Noi 1</MenuItem>
-                  <MenuItem value={2}>1</MenuItem>
-
-                </Select>
-              </FormControl>
-
-
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
-                <InputLabel id="demo-simple-select-standard-label">Type</InputLabel>
-                <Select
-                  id="demo-simple-select"
-                  value={type}
-                  onChange={handleChangeType}
-                >
-                  <MenuItem value={"All"}>All</MenuItem>
-                  <MenuItem value={0}>Staff</MenuItem>
-                  <MenuItem value={1}>Internship</MenuItem>
-                  <MenuItem value={2}>Collaborator</MenuItem>
-                </Select>
-              </FormControl>
-
-              <TextField
-                id="Search"
-                value={searchUser}
-                onChange={(e)=>setSearchUser(e.target.value)}
-                style={{ width: "270px" }}
-                label="Search by name"
-                variant="standard"
-              />
-            </div>
-            <div className='user-id'>
-              {
-
-                branch === "All" ? getUser.filter((i)=> i.name.includes(searchUser)).map((item) => (
-                  <ListUsers key={item.id} user={item} />
-                )) :
-
-                  getUser.filter((i) => (i.branchId == branch)).map((item) => (
-                    <ListUsers key={item.id} user={item} />
-                  ))
-
-
-              }
-              
-            </div>
-
-          </div>
-
+      <Collapse in={openListView} timeout="auto" unmountOnExit>
+          <ListUsers />
         </Collapse>
       </div>
     </div>

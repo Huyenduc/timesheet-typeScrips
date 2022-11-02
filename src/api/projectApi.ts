@@ -1,6 +1,6 @@
 import { getApi, postApi, deleteApi } from "../constants/apiHelper";
 import { PROJECTS_API } from "../api/endpoint";
-import { IFilter, IProjectRes, IGetQuantityRes, IGetCustomerRes, ICreateProject, ICreateProjectRes, IGetUserNotPaggingRes } from "../interfaces/projectType";
+import { IFilter, IProjectRes, IGetQuantityRes, IGetCustomerRes, ICreateProject, ICreateProjectRes, IGetUserNotPaggingRes, IcreateClient, IcreateClientRes } from "../interfaces/projectType";
 
 const getAllProject = async ({ status, search }: IFilter) => {
     if (typeof status === 'number') {
@@ -56,20 +56,14 @@ export const getUserProject = async () => {
    
 }
 
-// export const createNewClient = async ({ name, code, address }) => {
-//     try {
-//         const res = await axios.post(PROJECTS_API.CREATE_CLIENT, {
-//             name,
-//             code,
-//             address
-//         });
-//         return res;
-//     }
-//     catch (error) {
-//         return handleServiceError(error);
-
-//     }
-// }
+export const createNewClient = async ({ name, code, address }:IcreateClient) => {
+        const res = await postApi<IcreateClient,IcreateClientRes>(PROJECTS_API.CREATE_CLIENT, {
+            name,
+            code,
+            address
+        });
+        return res;
+}
 
 // export const deleteProjectApi = async (id) => {
 //     try {

@@ -21,7 +21,7 @@ export interface IGetQuantity {
 export interface IGetCustomer {
     name: string,
     code?: string,
-    id: number
+    id?: number
 }
 
 export interface ITasks {
@@ -40,14 +40,14 @@ export interface ICreateProject {
     name: string,
     code: string,
     status: number,
-    timeStart: string,
-    timeEnd?: string,
+    timeStart: string|null,
+    timeEnd?: string|null,
     note: string,
     projectType: number,
-    customerId: number,
+    customerId: number|string,
     tasks: ITasks[],
     users: IUsers[],
-    projectTargetUsers: [
+    projectTargetUsers?: [
         {
             userId: number,
             roleName: string,
@@ -59,6 +59,7 @@ export interface ICreateProject {
 }
 
 export interface IGetUserNotPagging {
+    branchId?:number|string
     name: string;
     isActive: boolean;
     type: number;
@@ -69,6 +70,13 @@ export interface IGetUserNotPagging {
     branch: number;
     id: number;
     projectType?: number;
+    emailAddress:string
+}
+
+export interface IcreateClient {
+    name:string,
+    code:string,
+    address:string
 }
 
 
@@ -94,7 +102,11 @@ export interface ICreateProjectRes {
 export interface IGetUserNotPaggingRes {
     result: IGetUserNotPagging[]
 }
-
+export interface IcreateClientRes {
+    success: boolean
+    result: IcreateClient,
+    error: string
+}
 export interface IFilter {
     status?: number,
     search?: string

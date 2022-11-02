@@ -16,19 +16,21 @@ import Tasks from './Task/Tasks';
 import { Button } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProject, getUser, getProjects } from '../../../redux/action/Project'
+import { createProject, getUser, getProjects } from '../../../redux/action/Project';
 import { getTask } from '../../../redux/action/Task'
-import { resetSelectedMembers } from '../../../redux/reducer/reducerProject'
+import { resetSelectedMembers } from '../../../redux/reducer/reducerProject';
 import { useSnackbar } from 'notistack';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AppDispatch, RootState } from '../../../redux/store';
+import { ICreateProject } from '../../../interfaces/projectType';
+
 
 
 
 const NewProject = () => {
   const [open, setOpen] = useState(false);
-  const [tab, setTap] = useState("1");
+  const [tab, setTap] = useState<string>("1");
   const [check, setCheck] = useState(true);
   const [activate, setActivate] = useState("Fixed Frice");
   const dispatch = useDispatch<AppDispatch>();
@@ -36,22 +38,22 @@ const NewProject = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   let schema = yup.object().shape({
-    customerId:yup.string().required(), 
-    name:yup.string().required(),
-    code:yup.string().required(),
-    
-  });
-  
+    customerId: yup.string().required(),
+    name: yup.string().required(),
+    code: yup.string().required(),
 
-  const { register, handleSubmit, reset, formState: { errors, isDirty, isValid }, setValue, control,trigger } = useForm({
+  });
+
+
+  const { register, handleSubmit, reset, formState: { errors, isDirty, isValid }, setValue, control, trigger } = useForm<ICreateProject>({
     defaultValues: {
       timeStart: null,
       timeEnd: null,
       customerId: "",
       isAllUserBelongTo: false,
-      
+
     },
-    resolver:yupResolver(schema)
+    resolver: yupResolver(schema)
   });
 
   const getSelectMember = useSelector((state:RootState) => state.project.selectedMembers);
@@ -59,7 +61,7 @@ const NewProject = () => {
   const getSelectTask = useSelector((state: RootState) => state.project.selectedTasks);
 
   const getProgaress = useSelector((state: RootState) => state.project.progaress);
-  const error = useSelector((state : RootState) => state.project.message);
+  const error = useSelector((state: RootState) => state.project.message);
 
   // console.log(getSelectTask)
   const handleOpen = () => {
@@ -85,33 +87,33 @@ const NewProject = () => {
       enqueueSnackbar(error, { variant: 'error' });
     }
 
-  }, [getProgaress], [open])
+  }, [getProgaress])
 
 
 
-  let tasks:Array<[]> = [];
-  let members:Array<[]> = [];
+  let tasks: Array<[]> = [];
+  let members: Array<[]> = [];
 
 
-  getSelectMember.forEach((member) => {
-    members.push({
-      id: 0,
-      userId: member.id,
-      type: typeof member.projectType === "undefined" ? 1 : member.projectType,
-    })
+  // getSelectMember.forEach((member) => {
+  //   members.push({
+  //     id: 0,
+  //     userId: member.id,
+  //     type: typeof member.projectType === "undefined" ? 1 : member.projectType,
+  //   })
 
-  });
+  // });
   // console.log("Members", getSelectMember);
 
-  getSelectTask.forEach((task) => {
-    tasks.push({
-      taskId: task.id,
-      billable: typeof task.billable === "undefined" ? true : task.billable,
-      id: 0,
-    })
-  })
+  // getSelectTask.forEach((task) => {
+  //   tasks.push({
+  //     taskId: task.id,
+  //     billable: typeof task.billable === "undefined" ? true : task.billable,
+  //     id: 0,
+  //   })
+  // });
 
-  const onHandSubmit = (data) => {
+  const onHandSubmit = (data: ICreateProject) => {
     const startDateFormat = dayjs(data.timeStart).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
     const endDateFormat = dayjs(data.timeEnd).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
 
@@ -133,7 +135,7 @@ const NewProject = () => {
 
 
   }
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: any, newValue: string) => {
     setTap(newValue);
   };
 
@@ -154,7 +156,7 @@ const NewProject = () => {
       >
         <form onSubmit={handleSubmit(onHandSubmit)}>
           <DialogTitle
-            onClose={handleClose}
+          // onClose={handleClose}
           >
             <div><h2>Create Project</h2></div>
           </DialogTitle>
@@ -177,15 +179,15 @@ const NewProject = () => {
                       setValue={setValue}
                       activate={activate}
                       setActivate={setActivate}
-                      errors ={errors}
-                      trigger= {trigger}
+                      errors={errors}
+                      trigger={trigger}
                     />
                   </TabPanel>
                   <TabPanel value="2">
                     <Team />
                   </TabPanel>
                   <TabPanel value="3">
-                    <Tasks/>
+                    <Tasks />
                   </TabPanel>
                 </TabContext>
               </Box>
@@ -213,7 +215,7 @@ const NewProject = () => {
               height: "40px",
               fontSize: "13",
               background: "#fb483a",
-              color: !isDirty && !isValid ? "rgba(0,0,0,.26)" :"#FFF",
+              color: !isDirty && !isValid ? "rgba(0,0,0,.26)" : "#FFF",
               textTransform: "none",
               padding: 16,
               minWidth: 64,
@@ -221,7 +223,7 @@ const NewProject = () => {
               alignItems: "center"
             }}
               type='submit'
-              disabled ={!isDirty && !isValid}
+              disabled={!isDirty && !isValid}
             // onClick={()=>handleSubmit(onHandSubmit)}
             >
               save

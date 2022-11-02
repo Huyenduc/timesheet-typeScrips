@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import getAllProject,{getQuantityProject, getAllCustome, createNewProject, getUserProject} from "../../api/projectApi";
-import { ICreateProject, IFilter } from "../../interfaces/projectType";
+import getAllProject,{getQuantityProject, getAllCustome, createNewProject, getUserProject, createNewClient} from "../../api/projectApi";
+import { IcreateClient, ICreateProject, IFilter } from "../../interfaces/projectType";
 
 export const getProjects = createAsyncThunk(
     "Project/getAll",
@@ -58,19 +58,19 @@ export const createProject = createAsyncThunk(
     }
 );
 
-// export const createClient = createAsyncThunk(
-//     "Project/createClient",
-//     async ({ name, code, address }) => {
-//         const res = await createNewClient(
-//             {
-//                 name,
-//                 code,
-//                 address
-//             }
-//         );
-//         return res;
-//     }
-// );
+export const createClient = createAsyncThunk(
+    "Project/createClient",
+    async ({ name, code, address }:IcreateClient) => {
+        const res = await createNewClient(
+            {
+                name,
+                code,
+                address
+            }
+        );
+        return res;
+    }
+);
 
 // export const deleteProject = createAsyncThunk(
 //     "Project/deleteProject",
